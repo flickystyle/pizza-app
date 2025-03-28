@@ -6,7 +6,7 @@ function NotFound() {
 
   return (
     <div>
-      <h1>Что-то пошло не так 😢</h1>
+      <h1>Something wrong 😢</h1>
       <p>{error.data || error.message}</p>
       <LinkButton to={'-1'}>&larr; Go back</LinkButton>
     </div>

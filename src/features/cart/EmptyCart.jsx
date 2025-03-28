@@ -6,8 +6,7 @@ function EmptyCart() {
             <Link to="/menu">&larr; Назад в меню</Link>
 
             <p>
-                Ваша корзина всё ещё пуста. Выберите пиццу, которую хотите
-                заказать :)
+                Your cart is still empty. Please choose your pizzas :)
             </p>
         </div>
     );
