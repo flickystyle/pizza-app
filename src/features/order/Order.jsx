@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useFetcher, useLoaderData } from 'react-router-dom';
 import { getOrder } from '../../services/apiRestaurant';
 import {
   calcMinutesLeft,
@@ -6,11 +6,18 @@ import {
   formatDate,
 } from '../../utils/helpers';
 import OrderItem from './OrderItem';
+import { useEffect } from 'react';
 
 function Order() {
   const order = useLoaderData();
-  
+  const fetcher = useFetcher();
 
+  useEffect(() => {
+    if (!fetcher.data && fetcher.state === 'idle') {
+      fetcher.load('/menu');
+    }
+  }, [fetcher]);
+  console.log(fetcher.data);
   const {
     id,
     status,
@@ -60,8 +67,11 @@ function Order() {
           <OrderItem
             key={item.pizzaId}
             item={item}
-            // isLoadingIngredients={}
-            // ingredients={}
+            isLoadingIngredients={fetcher.state === 'loading'}
+            ingredients={
+              fetcher?.data?.find((el) => el.id === item.pizzaId)
+                ?.ingredients ?? []
+            }
           />
         ))}
       </ul>
