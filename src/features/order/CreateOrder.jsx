@@ -24,7 +24,6 @@ function CreateOrder() {
     error: errorAddress,
   } = useSelector(getUser);
   const isLoadingAddress = addressStatus === 'loading';
-
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
@@ -142,11 +141,11 @@ function CreateOrder() {
 async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
+  
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === 'on',
+    priority: data.priority === 'true',
   };
 
   const newOrder = await createOrder(order);

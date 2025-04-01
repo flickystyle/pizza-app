@@ -7,6 +7,7 @@ import {
 } from '../../utils/helpers';
 import OrderItem from './OrderItem';
 import { useEffect } from 'react';
+import UpdateOrder from './UpdateOrder';
 
 function Order() {
   const order = useLoaderData();
@@ -17,7 +18,7 @@ function Order() {
       fetcher.load('/menu');
     }
   }, [fetcher]);
-  console.log(fetcher.data);
+
   const {
     id,
     status,
@@ -90,6 +91,7 @@ function Order() {
           {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+      {!priority && <UpdateOrder />}
     </div>
   );
 }
